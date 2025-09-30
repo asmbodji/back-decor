@@ -1,0 +1,25 @@
+# Environnements virtuels
+venv/
+.env/
+
+# Fichiers Python compilés
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Config éditeurs
+.vscode/
+.idea/
+
+# Mac / Linux system files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Autres caches
+*.egg-info/
+.eggs/
+dist/
+build/
