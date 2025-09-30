@@ -57,6 +57,82 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 </script>
+<style>
+  @media (max-width: 1024px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .slider-container {
+    max-width: 100%;
+    margin-top: 20px;
+  }
+
+  .steps-container {
+    flex-wrap: wrap;
+  }
+
+  .inspire-gallery {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 10px 20px;
+  }
+
+  .navbar ul {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 10px;
+  }
+
+  .navbar ul.show {
+    display: flex;
+  }
+
+  .navbar::after {
+    content: "☰";
+    font-size: 1.8rem;
+    cursor: pointer;
+    display: block;
+  }
+
+  .hero-text h1 {
+    font-size: 2rem;
+  }
+
+  .hero-text p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 30px 15px;
+  }
+
+  .hero-text h1 {
+    font-size: 1.6rem;
+  }
+
+  .hero-text p {
+    font-size: 0.9rem;
+  }
+
+  .slider-label {
+    font-size: 0.7rem;
+  }
+}
+</style>
 
 </body>
 </html>

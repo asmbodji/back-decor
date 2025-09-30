@@ -284,8 +284,8 @@ function moveSlider(x) {
   sliderAfter.style.width = percent + "%";
   sliderHandle.style.left = percent + "%";
 }
-
   </script>
+  
   <script>
 document.addEventListener("DOMContentLoaded", () => {
   // Liste des backgrounds (mets tes propres chemins d'images)
@@ -337,6 +337,17 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 </script>
+<script>
+  const navbar = document.querySelector(".navbar");
+  const menu = document.querySelector(".navbar ul");
+
+  navbar.addEventListener("click", (e) => {
+    if (e.target === navbar) return;
+    if (e.target.closest("ul")) return;
+    menu.classList.toggle("show");
+  });
+</script>
+
 
 </body>
 </html>
