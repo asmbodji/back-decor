@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DécorIA - Re-décorez avec l'IA</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="page-transition"></div>
+  
+  <!-- HEADER -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="images/lol.png" alt="Logo">
+    </div>
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="boutique.html">Boutique</a></li>
+      <li><a href="inspirations.html">Inspirations</a></li>
+      <li><a href="features.html">Fonctionnalités</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1 class="typing-text">Re-décorez votre pièce en un clic <br> avec l'IA</h1>
+      <p>Prenez une photo de votre pièce et laissez l’IA trouver la nouvelle décoration</p>
+
+      <!-- BOUTON + input caché -->
+      <button id="try-now" class="btn cta-btn">Essayez maintenant</button>
+      <input type="file" id="upload" accept="image/*" style="display:none;">
+      <p class="info-text">💡 Pour de meilleurs résultats, utilisez une photo panoramique</p>
+    </div>
+
+    <div class="hero-image">
+      <div class="before-after">
+        <div class="image-container">
+          <img src="images/before.png" alt="Before" class="ba-img">
+          <span class="img-label">Before</span>
+        </div>
+        <div class="image-container">
+          <img src="images/after.png" alt="After" class="ba-img">
+          <span class="img-label">After</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODALE STYLES -->
+  <div id="styleModal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Choisissez un style</h2>
+      <div class="styles-list">
+        <div class="style-card" data-style="moderne">
+          <img src="images/moderne.jpg" alt="Moderne">
+          <p>Moderne</p>
+        </div>
+        <div class="style-card" data-style="scandinave">
+          <img src="images/scan.jpg" alt="Scandinave">
+          <p>Scandinave</p>
+        </div>
+        <div class="style-card" data-style="minimaliste">
+          <img src="images/minimaliste.jpg" alt="Minimaliste">
+          <p>Minimaliste</p>
+        </div>
+        <div class="style-card" data-style="industriel">
+          <img src="images/industriel.jpg" alt="Industriel">
+          <p>Industriel</p>
+        </div>
+      </div>
+      <button id="cancelModal">Annuler</button>
+    </div>
+  </div>
+
+  <!-- CONTAINER POUR LES RÉSULTATS -->
+  <section id="results" style="text-align:center; margin:40px 0;"></section>
+
+  <!-- Comment ça marche -->
+  <section class="steps">
+    <h2>Comment ça marche</h2>
+    <div class="steps-container">
+      <div class="step">
+        <img src="https://img.icons8.com/ios/50/upload.png" alt="Upload">
+        <p>Téléchargez une photo</p>
+      </div>
+      <div class="step">
+        <img src="https://img.icons8.com/ios/50/todo-list.png" alt="Style">
+        <p>Sélectionnez un style</p>
+      </div>
+      <div class="step">
+        <img src="https://img.icons8.com/ios/50/image.png" alt="Result">
+        <p>Découvrez le résultat</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Inspire -->
+  <section class="inspire">
+    <h2>Inspirez-vous</h2>
+    <div class="inspire-gallery">
+      <img src="images/exemple1.png" alt="Exemple 1">
+      <img src="images/exemple2.png" alt="Exemple 2">
+      <img src="images/exemple3.png" alt="Exemple 3">
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <h2>Prêt à commencer ?</h2>
+    <a href="#" class="btn">Essayez maintenant</a>
+  </section>
+
+  <!-- STYLES -->
+  <style>
+    /* Modal background */
+    .modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      display: flex; justify-content: center; align-items: center;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+    }
+
+    .hidden { display: none; }
+
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 500px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      animation: fadeIn 0.3s ease;
+    }
+
+    .styles-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin: 20px 0;
+    }
+
+    .style-card {
+      border: 2px solid #ccc;
+      border-radius: 12px;
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform 0.2s, border-color 0.2s;
+      background: #fff;
+    }
+
+    .style-card:hover {
+      transform: scale(1.02);
+      border-color: #6c63ff;
+    }
+
+    .style-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .style-card p {
+      margin: 10px 0;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+
+    @media (min-width: 768px) {
+      .styles-list { grid-template-columns: 1fr 1fr; }
+    }
+    @media (min-width: 1200px) {
+      .styles-list { grid-template-columns: 1fr 1fr; gap: 30px; }
+    }
+
+    #cancelModal {
+      background: #ccc;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    @keyframes fadeBlur {
+      from { opacity: 0; filter: blur(8px); transform: scale(0.95); }
+      to   { opacity: 1; filter: blur(0); transform: scale(1); }
+    }
+
+    .modal-content { animation: fadeBlur 0.5s ease forwards; }
+  </style>
+
+  <!-- SCRIPTS -->
+  <script>
+  document.getElementById('try-now').addEventListener('click', () => {
+    document.getElementById('upload').click();
+  });
+
+  let selectedFile = null;
+
+  document.getElementById('upload').addEventListener('change', async (e) => {
+    selectedFile = e.target.files[0];
+    if (!selectedFile) return;
+
+    document.getElementById('styleModal').classList.remove('hidden');
+  });
+
+  // Sélection style
+  document.querySelectorAll('.style-card').forEach(card => {
+    card.addEventListener('click', async () => {
+      const style = card.dataset.style;
+
+      const formData = new FormData();
+      formData.append('photo', selectedFile);
+      formData.append('style', style);
+
+     const res = await fetch('https://back-decor.onrender.com/api/decor', {
+  method: 'POST',
+  body: formData
+});
+
+
+      const data = await res.json();
+
+      if (data.status === "ok" && data.image) {
+        const resultsDiv = document.getElementById("results");
+        resultsDiv.innerHTML = `
+          <h3>Style : ${data.style}</h3>
+          <img src="data:image/png;base64,${data.image}" style="max-width:500px;border-radius:12px;"/>
+        `;
+      } else {
+        alert("Erreur: " + (data.error || "aucun résultat reçu"));
+      }
+
+      document.getElementById('styleModal').classList.add('hidden');
+    });
+  });
+
+  // Bouton annuler
+  document.getElementById('cancelModal').addEventListener('click', () => {
+    document.getElementById('styleModal').classList.add('hidden');
+  });
+  </script>
+  
+</body>
+</html>
