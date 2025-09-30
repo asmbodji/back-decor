@@ -11,18 +11,19 @@
   <div class="page-transition"></div>
   
   <!-- HEADER -->
-  <header class="navbar">
-    <div class="logo">
-      <img src="images/lol.png" alt="Logo">
-    </div>
-    <ul>
-      <li><a href="index.html">Accueil</a></li>
-      <li><a href="boutique.html">Boutique</a></li>
-      <li><a href="inspirations.html">Inspirations</a></li>
-      <li><a href="features.html">Fonctionnalités</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-  </header>
+ <header class="navbar">
+  <div class="logo">
+    <img src="images/lol.png" alt="Logo">
+  </div>
+  <ul id="menu">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="boutique.html">Boutique</a></li>
+    <li><a href="inspirations.html">Inspirations</a></li>
+    <li><a href="features.html">Fonctionnalités</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</header>
+
 
   <!-- HERO -->
   <section class="hero">
@@ -36,18 +37,23 @@
       <p class="info-text">💡 Pour de meilleurs résultats, utilisez une photo panoramique</p>
     </div>
 
-    <div class="hero-image">
-      <div class="before-after">
-        <div class="image-container">
-          <img src="images/before.png" alt="Before" class="ba-img">
-          <span class="img-label">Before</span>
-        </div>
-        <div class="image-container">
-          <img src="images/after.png" alt="After" class="ba-img">
-          <span class="img-label">After</span>
-        </div>
-      </div>
-    </div>
+    <div class="slider-container" id="slider">
+  <!-- Image BEFORE -->
+  <img src="images/moderne.jpg" alt="Before" class="slider-img">
+
+  <!-- Image AFTER (coupée dynamiquement) -->
+  <div class="slider-after" id="slider-after">
+    <img src="images/minimaliste.jpg" alt="After" class="slider-img">
+  </div>
+
+  <!-- Barre centrale -->
+  <div class="slider-handle" id="slider-handle"></div>
+
+  <!-- Labels -->
+  <span class="slider-label before">Before</span>
+  <span class="slider-label after">After</span>
+</div>
+
   </section>
 
   <!-- MODALE STYLES -->
@@ -245,7 +251,92 @@
   document.getElementById('cancelModal').addEventListener('click', () => {
     document.getElementById('styleModal').classList.add('hidden');
   });
+
+  const slider = document.getElementById("slider");
+const sliderAfter = document.getElementById("slider-after");
+const sliderHandle = document.getElementById("slider-handle");
+
+let isDragging = false;
+
+sliderHandle.addEventListener("mousedown", () => { isDragging = true; });
+sliderHandle.addEventListener("touchstart", () => { isDragging = true; });
+
+window.addEventListener("mouseup", () => { isDragging = false; });
+window.addEventListener("touchend", () => { isDragging = false; });
+
+window.addEventListener("mousemove", (e) => {
+  if (!isDragging) return;
+  moveSlider(e.clientX);
+});
+
+window.addEventListener("touchmove", (e) => {
+  if (!isDragging) return;
+  moveSlider(e.touches[0].clientX);
+});
+
+function moveSlider(x) {
+  const rect = slider.getBoundingClientRect();
+  let offsetX = x - rect.left;
+  if (offsetX < 0) offsetX = 0;
+  if (offsetX > rect.width) offsetX = rect.width;
+
+  const percent = (offsetX / rect.width) * 100;
+  sliderAfter.style.width = percent + "%";
+  sliderHandle.style.left = percent + "%";
+}
+
   </script>
-  
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  // Liste des backgrounds (mets tes propres chemins d'images)
+  const backgrounds = [
+    "images/background.jpg",
+    "images/background2.jpg",
+    "images/background1.jpg",
+    "images/background4.jpeg",
+    "images/background5.jpg"
+  ];
+
+  const hero = document.querySelector(".hero");
+  let index = 0;
+
+  setInterval(() => {
+    index = (index + 1) % backgrounds.length;
+    hero.style.backgroundImage = `url('${backgrounds[index]}')`;
+  }, 10000); // 10 000 ms = 10s
+});
+const menuLinks = document.querySelectorAll("#menu li a");
+
+// Activer Accueil par défaut
+menuLinks[0].classList.add("active");
+
+menuLinks.forEach(link => {
+  link.addEventListener("click", (e) => {
+    // Retire l'ancien actif
+    menuLinks.forEach(l => l.classList.remove("active"));
+    // Ajoute au nouvel élément cliqué
+    e.target.classList.add("active");
+  });
+});
+
+
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const links = document.querySelectorAll("header.navbar ul li a");
+  const currentPage = window.location.pathname.split("/").pop(); // ex: "boutique.html"
+
+  links.forEach(link => {
+    // On enlève d'abord tous les badges
+    link.classList.remove("active");
+
+    // Si le href correspond au fichier de la page actuelle
+    if (link.getAttribute("href") === currentPage) {
+      link.classList.add("active");
+    }
+  });
+});
+</script>
+
 </body>
 </html>

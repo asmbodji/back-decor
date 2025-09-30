@@ -324,3 +324,140 @@ body {
   transform: translateX(0);
 }
 
+
+/* ===== CONTAINER ===== */
+.slider-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px;   /* largeur moyenne */
+  margin: 40px auto;  /* centré */
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 4 / 3; /* ratio pour garder une belle proportion */
+  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+}
+
+/* ===== IMAGES ===== */
+.slider-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
+
+.slider-after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;   /* moitié par défaut */
+  height: 100%;
+  overflow: hidden;
+  z-index: 2;
+  transition: width 0.1s linear;
+}
+
+/* ===== HANDLE ===== */
+.slider-handle {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 4px;
+  height: 100%;
+  background: white;
+  border: 1px solid #333;
+  z-index: 5;
+  cursor: ew-resize;
+  box-shadow: 0 0 6px rgba(0,0,0,0.3);
+  transform: translateX(-50%);
+}
+
+/* ===== LABELS ===== */
+.slider-label {
+  position: absolute;
+  top: 12px;
+  padding: 4px 10px;
+  font-size: 14px;
+  font-weight: bold;
+  background: rgba(0,0,0,0.65);
+  color: #fff;
+  border-radius: 6px;
+  z-index: 6;
+  user-select: none;
+}
+
+.slider-label.before { left: 12px; }
+.slider-label.after { right: 12px; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .slider-container {
+    max-width: 90%;
+    aspect-ratio: 3 / 4; /* plus vertical sur mobile */
+  }
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background: #fff;
+  margin: 20px auto;
+  max-width: 1200px;
+}
+
+/* LOGO */
+.navbar .logo img {
+  height: 90px;       /* agrandi le logo */
+  width: auto;        /* garde les proportions */
+  object-fit: contain; /* évite les déformations */
+}
+
+/* Supprime les marges par défaut */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Évite que le header pousse le contenu */
+header.navbar {
+  margin: 0;
+  padding: 15px 40px;  /* ajuste si tu veux plus d’air mais pas d’espace en bas */
+  box-sizing: border-box;
+}
+
+/* Supprime l’espace inutile au-dessus du hero */
+.hero {
+  margin-top: 0;
+  padding-top: 40px; /* tu peux réduire à 20px ou 0 si tu veux que ça colle au header */
+}
+
+/* MENU */
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar ul li a {
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  color: #333;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* STYLE DU BADGE (élément actif) */
+.navbar ul li a.active {
+  border: 2px solid #1c1602; /* doré luxe */
+  color: #151001;
+  background: rgba(212, 175, 55, 0.08); /* léger fond */
+}

@@ -12,19 +12,51 @@
   <div class="page-transition"></div>
 
   <!-- Ton header qui reste identique -->
-  <header class="navbar">
-    <div class="logo">
-      <img src="images/lol.png" alt="Logo">
-    </div>
-    <ul>
-      <li><a href="index.html">Accueil</a></li>
-      <li><a href="boutique.html">Boutique</a></li>
-      <li><a href="inspirations.html">Inspirations</a></li>
-      <li><a href="features.html">Fonctionnalités</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-  </header>
+<header class="navbar">
+  <div class="logo">
+    <img src="images/lol.png" alt="Logo">
+  </div>
+  <ul id="menu">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="boutique.html">Boutique</a></li>
+    <li><a href="inspirations.html">Inspirations</a></li>
+    <li><a href="features.html">Fonctionnalités</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</header>
 
-    
+<script>
+  const menuLinks = document.querySelectorAll("#menu li a");
+
+// Activer Accueil par défaut
+menuLinks[0].classList.add("active");
+
+menuLinks.forEach(link => {
+  link.addEventListener("click", (e) => {
+    // Retire l'ancien actif
+    menuLinks.forEach(l => l.classList.remove("active"));
+    // Ajoute au nouvel élément cliqué
+    e.target.classList.add("active");
+  });
+});
+
+</script>
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const links = document.querySelectorAll("header.navbar ul li a");
+  const currentPage = window.location.pathname.split("/").pop(); // ex: "boutique.html"
+
+  links.forEach(link => {
+    // On enlève d'abord tous les badges
+    link.classList.remove("active");
+
+    // Si le href correspond au fichier de la page actuelle
+    if (link.getAttribute("href") === currentPage) {
+      link.classList.add("active");
+    }
+  });
+});
+</script>
+
 </body>
 </html>
